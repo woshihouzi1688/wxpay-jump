@@ -4,19 +4,25 @@
   <meta charset="utf-8">
   <title>跳转至微信支付</title>
   <style>
-    body {
-      font-family: Arial;
-      text-align: center;
-      margin-top: 100px;
-    }
-    button {
-      padding: 12px 24px;
-      font-size: 18px;
-    }
+    body { font-family: Arial; text-align: center; margin-top: 100px; }
+    button { padding: 12px 24px; font-size: 18px; margin: 10px; }
   </style>
 </head>
 <body>
-  <h2>点击下方按钮跳转至微信支付</h2>
-  <button onclick="location.href='weixin://wxpay/bizpayurl?pr=8FzsscKz1';">立即跳转</button>
+  <h2>点击按钮跳转或复制微信支付链接</h2>
+  <button onclick="location.href='weixin://wxpay/bizpayurl?pr=8FzsscKz1';">立即跳转</button><br/>
+  <button onclick="copyText()">复制跳转链接</button>
+
+  <script>
+    function copyText() {
+      const el = document.createElement('textarea');
+      el.value = 'weixin://wxpay/bizpayurl?pr=V1sg3jHz3';
+      document.body.appendChild(el);
+      el.select();
+      document.execCommand('copy');
+      document.body.removeChild(el);
+      alert("已复制，请粘贴到微信聊天框打开");
+    }
+  </script>
 </body>
 </html>
