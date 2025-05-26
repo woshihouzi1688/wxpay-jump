@@ -3,31 +3,64 @@
 <head>
   <meta charset="utf-8">
   <title>跳转至微信支付</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
-    body { font-family: Arial; text-align: center; margin-top: 80px; }
-    button { padding: 12px 24px; font-size: 18px; margin: 10px; }
-    .tip { font-size: 16px; margin-top: 20px; color: gray; }
-    .link { color: blue; word-break: break-all; font-size: 14px; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      text-align: center;
+      padding: 50px 20px;
+      background-color: #ffffff;
+      color: #333;
+    }
+
+    h1 {
+      font-size: 28px;
+      margin-bottom: 30px;
+    }
+
+    p {
+      font-size: 20px;
+      margin-bottom: 40px;
+    }
+
+    button {
+      font-size: 20px;
+      padding: 14px 28px;
+      margin: 10px;
+      border: none;
+      border-radius: 6px;
+      color: white;
+      background-color: #07c160;
+      cursor: pointer;
+    }
+
+    .secondary {
+      background-color: #888;
+    }
+
+    .link {
+      margin-top: 30px;
+      font-size: 16px;
+      word-break: break-all;
+    }
   </style>
 </head>
 <body>
-  <h2>点击按钮跳转或复制微信支付链接</h2>
-  <button onclick="location.href='weixin://wxpay/bizpayurl?pr=V1sg3jHz3';">立即跳转</button>
-  <button onclick="copyText()">复制链接</button>
-
-  <div class="tip">如无法跳转，请复制以下链接粘贴到微信聊天窗口打开</div>
-  <div class="link" id="copylink">weixin://wxpay/bizpayurl?pr=8FzsscKz1</div>
+  <h1>跳转至微信支付</h1>
+  <p>点击下方按钮打开微信支付</p>
+  <button onclick="location.href='weixin://wxpay/bizpayurl?pr=8FzsscKz1'">立即跳转</button>
+  <button class="secondary" onclick="copyLink()">复制链接</button>
+  <div class="link">
+    如无法跳转，请复制此链接并粘贴到微信打开：<br>
+    <span id="wxlink">weixin://wxpay/bizpayurl?pr=8FzssCkZ1</span>
+  </div>
 
   <script>
-    function copyText() {
-      const text = document.getElementById("copylink").innerText;
-      const el = document.createElement('textarea');
-      el.value = text;
-      document.body.appendChild(el);
-      el.select();
-      document.execCommand('copy');
-      document.body.removeChild(el);
-      alert("已复制链接，请粘贴到微信聊天窗口打开");
+    function copyLink() {
+      const text = document.getElementById("wxlink").innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        alert("链接已复制，可粘贴至微信中打开");
+      });
     }
   </script>
 </body>
